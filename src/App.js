@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>My Notes App</h1>
+      <h1>Oral Screening</h1>
       <input
         type="file"
         onChange={onChange}
@@ -76,9 +76,8 @@ function App() {
         {
           notes.map(note => (
             <div key={note.id || note.name}>
-              <h2>{note.name}</h2>
-              <p>{note.description}</p>
-              <button onClick={() => deleteNote(note)}>Delete note</button>
+              {note.name} {note.description}
+              <button onClick={() => deleteNote(note)}>Delete Image</button>
               {
                 note.image && <img src={note.image} style={{width: 400}} />
               }  
