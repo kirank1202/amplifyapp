@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { API, inputLabel, Storage } from 'aws-amplify';
+import { API, Storage } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { listNotes } from './graphql/queries';
 import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
@@ -12,7 +12,7 @@ function App() {
   const [formData, setFormData] = useState(initialFormState);
 
   useEffect(() => {
-  /*  fetchNotes(); */
+    fetchNotes();
   }, []);
 
   async function fetchNotes() {
@@ -56,53 +56,22 @@ function App() {
   return (
     <div className="App">
       <h1>Oral Screening</h1>
-      Student id:  
-      <input
-        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
-        placeholder="Enter Student Id"
-        value={formData.name}
-      />
-      Student Name: 
-      <input
-        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
-        placeholder="Enter Student Name"
-        value={formData.description}
-      />
-      
-      <h4>Left Teeth:
       <input
         type="file"
         onChange={onChange}
       />
-      </h4>
 
-      <h4>Right Teeth:
-      <input 
-        type = "file"
-        onChange={onChange}
+      <input
+        onChange={e => setFormData({ ...formData, 'name': e.target.value})}
+        placeholder="Note name"
+        value={formData.name}
       />
-      </h4>
-
-      <h4>Bottom Teeth:
-      <input 
-        type = "file"
-        onChange={onChange}
+      <input
+        onChange={e => setFormData({ ...formData, 'description': e.target.value})}
+        placeholder="Note description"
+        value={formData.description}
       />
-      </h4>
-
-      <h4>Top Teeth:
-      <input 
-        type = "file"
-        onChange={onChange}
-      />
-      </h4>
-
-
-      <button onClick={createNote}>Submit</button>
-     
-      <button onClick={fetchNotes}>Retrieve Images</button> 
-     
-
+      <button onClick={createNote}>Create Note</button>
       <div style={{marginBottom: 30}}>
         {
           notes.map(note => (
